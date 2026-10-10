@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order or book | OMAQ Apparel</title>
+<meta name="description" content="Timeless, unique custom outfits for all genders and ages. Fabric sourcing, in-person fittings in Scotland, UK-wide delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"></head><body>
+<header class="top"><a class="logo" href="index.html">OMAQ <span>Apparel</span></a><nav aria-label="Main"><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How it works</a><a href="story.html">Our story</a><a href="gallery.html">Gallery</a><a class="btn" href="order.html" aria-current="page">Order or book</a></nav></header>
+<main><section class="phead c-yel"><div class="in"><h1>Order or book</h1><p>Request a piece or book a fitting. We reply on WhatsApp.</p></div></section>
+<section class="wrap order">
+<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="order">Order a piece</button><button role="tab" aria-selected="false" data-tab="fitting">Book a fitting</button></div>
+<form id="form-order" class="panel" novalidate>
+<label>Your name<input name="name" required autocomplete="name"></label>
+<label>Who is it for?<select name="who"><option>Woman</option><option>Man</option><option>Child</option></select></label>
+<label>What would you like made?<input name="item" required placeholder="e.g. two-piece set for a wedding"></label>
+<label>Occasion and date needed<input name="date" placeholder="e.g. 14 December"></label>
+<label>Fabric<select name="fabric"><option>I have my own fabric</option><option>Please source fabric for me</option><option>Not sure yet</option></select></label>
+<label>Delivery<select name="delivery"><option>Scotland, in-person fitting</option><option>Elsewhere in the UK</option><option>Outside the UK</option></select></label>
+<label>Extra details<textarea name="notes" rows="3" placeholder="Colours, style ideas, inspiration"></textarea></label>
+<button class="btn" type="submit">Send request on WhatsApp</button>
+<p class="note">Payment is arranged on WhatsApp for now. Card payment is coming soon.</p><p class="error" role="alert"></p></form>
+<form id="form-fitting" class="panel" hidden novalidate>
+<p class="note">In-person fittings are available in Scotland.</p>
+<label>Your name<input name="name" required autocomplete="name"></label>
+<label>Town or city in Scotland<input name="town" required></label>
+<label>Preferred date<input name="date" type="date" required></label>
+<label>Preferred time<select name="time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+<label>What is the fitting for?<input name="item" placeholder="e.g. measurements for a suit"></label>
+<button class="btn" type="submit">Request fitting on WhatsApp</button><p class="error" role="alert"></p></form>
+</section>
+</main>
+<footer><p><b>OMAQ Apparel</b>, Scotland, United Kingdom</p><p><a id="wa-link" href="#">WhatsApp</a><a href="https://www.instagram.com/omaq_apparel" rel="noopener">Instagram</a><a href="https://vm.tiktok.com/ZN8Bhapgd/" rel="noopener">TikTok</a></p></footer>
+<script src="app.js"></script></body></html>

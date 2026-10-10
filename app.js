@@ -6,13 +6,14 @@ const CONFIG = {
 
 // Placeholder gallery. Replace `src` with real photos in /images when the client sends them.
 const GALLERY = [
-  { label: "Two-piece set", bg: "linear-gradient(160deg,#5b2a5e,#c2185b)" },
-  { label: "Occasion dress", bg: "linear-gradient(160deg,#1f3a5f,#3f88c5)" },
-  { label: "Tailored trousers", bg: "linear-gradient(160deg,#2d4a3e,#9bc53d)" },
-  { label: "Matching family set", bg: "linear-gradient(160deg,#7a3e00,#c8963e)" },
+  { label: "Two-piece set", bg: "linear-gradient(160deg,#e5097f,#ff7a00)" },
+  { label: "Occasion dress", bg: "linear-gradient(160deg,#4a14c8,#00b3a4)" },
+  { label: "Tailored trousers", bg: "linear-gradient(160deg,#00b3a4,#ffd60a)" },
+  { label: "Matching family set", bg: "linear-gradient(160deg,#ff7a00,#e5097f)" },
 ];
 
-document.getElementById("gallery-grid").innerHTML = GALLERY.map(g =>
+const grid = document.getElementById("gallery-grid");
+if (grid) grid.innerHTML = GALLERY.map(g =>
   g.src ? `<img src="${g.src}" alt="${g.label}" loading="lazy">`
         : `<div class="swatch" style="background:${g.bg}"><span>${g.label}</span></div>`).join("");
 
@@ -20,14 +21,17 @@ const waUrl = text => `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURICo
 document.getElementById("wa-link").href = CONFIG.whatsappNumber ? waUrl("Hello OMAQ Apparel") : "https://www.instagram.com/omaq_apparel";
 
 function showTab(name) {
+  if (!document.getElementById("form-order")) return;
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === name));
   document.getElementById("form-order").hidden = name !== "order";
   document.getElementById("form-fitting").hidden = name !== "fitting";
 }
-document.querySelectorAll("[data-tab]").forEach(el => el.addEventListener("click", () => showTab(el.dataset.tab)));
+document.querySelectorAll("button[data-tab]").forEach(el => el.addEventListener("click", () => showTab(el.dataset.tab)));
+showTab(new URLSearchParams(location.search).get("tab") === "fitting" ? "fitting" : "order");
 
 function handle(formId, build) {
   const form = document.getElementById(formId);
+  if (!form) return;
   form.addEventListener("submit", e => {
     e.preventDefault();
     const err = form.querySelector(".error");

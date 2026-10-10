@@ -1,5 +1,5 @@
 # OMAQ Apparel website
-Static site (HTML, CSS, JS). No database or build step. Open `index.html` or host on Netlify, Vercel or GitHub Pages.
+Multi-page static site (index, services, how-it-works, story, gallery, order). No database or build step needed to host. Edit pages in `build.sh` and run `sh build.sh` to regenerate the HTML.
 
 - Set the WhatsApp number in `app.js` (`CONFIG.whatsappNumber`).
 - Add photos to `/images` and set `src` for each item in `GALLERY` in `app.js`.
