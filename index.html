@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OMAQ Apparel | Custom wears made for you, Scotland and UK</title>
+<meta name="description" content="Timeless, unique custom outfits for all genders and ages. Fabric sourcing, in-person fittings in Scotland, UK-wide delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#top">OMAQ <span>Apparel</span></a>
+  <nav aria-label="Main">
+    <a href="#services">Services</a><a href="#process">How it works</a><a href="#story">Our story</a><a href="#gallery">Gallery</a>
+    <a class="btn small" href="#order">Order or book</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="tape" aria-hidden="true"></div>
+    <h1>Timeless. Unique. Yours.</h1>
+    <p class="lead">Custom wears for every gender and age, made from your measurements, in the fabric you choose. We can source the fabric too.</p>
+    <div class="cta-row">
+      <a class="btn" href="#order">Order a piece</a>
+      <a class="btn ghost" href="#order" data-tab="fitting">Book a fitting</a>
+    </div>
+    <p class="note">Based in Scotland. Delivering across the UK, worldwide soon.</p>
+  </section>
+
+  <section id="services" class="wrap">
+    <h2>What we make</h2>
+    <dl class="services">
+      <div><dt>Women</dt><dd>Dresses, blouses, skirts, trousers, two-piece sets and outfits for your outing.</dd></div>
+      <div><dt>Men</dt><dd>Shirts, trousers, suits and traditional wear, cut to your measurements.</dd></div>
+      <div><dt>Children</dt><dd>Matching family outfits and special-day wear for all ages.</dd></div>
+      <div><dt>Fabric sourcing</dt><dd>Tell us the look. We find the fabric and you approve it before we cut.</dd></div>
+    </dl>
+    <p class="note">Every piece is different, so each one is priced after we talk about your design.</p>
+  </section>
+
+  <section id="process" class="wrap band">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Tell us your idea.</b> Send a request or photos of what you like.</li>
+      <li><b>Agree the details.</b> We chat on WhatsApp about fabric, style, price and timing.</li>
+      <li><b>Measurements and fitting.</b> In person in Scotland. Guided measuring for the rest of the UK.</li>
+      <li><b>We make it.</b> You see progress before it is finished.</li>
+      <li><b>Delivery or pickup.</b> Tracked UK delivery, or collect in Scotland.</li>
+    </ol>
+  </section>
+
+  <section id="story" class="wrap story">
+    <h2>Our story</h2>
+    <p>It began with a father who knew how to put an outfit together, and a daughter who was watching. He bought her her first heels. Later, she saw her aunt's sewing machine and started cutting paper into blouses, skirts and trousers.</p>
+    <p>That paper became cloth. Today OMAQ Apparel makes clothes that are unique to the person wearing them.</p>
+  </section>
+
+  <section id="gallery" class="wrap">
+    <h2>Recent work</h2>
+    <div class="gallery" id="gallery-grid"></div>
+    <p class="note">Photos of finished pieces are coming soon. Follow us on Instagram and TikTok to see new work first.</p>
+  </section>
+
+  <section id="order" class="wrap order">
+    <h2>Order a piece or book a fitting</h2>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="order">Order a piece</button>
+      <button role="tab" aria-selected="false" data-tab="fitting">Book a fitting</button>
+    </div>
+
+    <form id="form-order" class="panel" novalidate>
+      <label>Your name<input name="name" required autocomplete="name"></label>
+      <label>Who is it for?
+        <select name="who"><option>Woman</option><option>Man</option><option>Child</option></select></label>
+      <label>What would you like made?<input name="item" required placeholder="e.g. two-piece set for a wedding"></label>
+      <label>Occasion and date needed<input name="date" placeholder="e.g. 14 December"></label>
+      <label>Fabric
+        <select name="fabric"><option>I have my own fabric</option><option>Please source fabric for me</option><option>Not sure yet</option></select></label>
+      <label>Delivery
+        <select name="delivery"><option>Scotland, in-person fitting</option><option>Elsewhere in the UK</option><option>Outside the UK</option></select></label>
+      <label>Extra details<textarea name="notes" rows="3" placeholder="Colours, style ideas, inspiration"></textarea></label>
+      <button class="btn" type="submit">Send request on WhatsApp</button>
+      <p class="note">Payment is arranged on WhatsApp for now. Card payment is coming soon.</p>
+      <p class="error" role="alert"></p>
+    </form>
+
+    <form id="form-fitting" class="panel" hidden novalidate>
+      <p class="note">In-person fittings are available in Scotland.</p>
+      <label>Your name<input name="name" required autocomplete="name"></label>
+      <label>Town or city in Scotland<input name="town" required></label>
+      <label>Preferred date<input name="date" type="date" required></label>
+      <label>Preferred time
+        <select name="time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+      <label>What is the fitting for?<input name="item" placeholder="e.g. measurements for a suit"></label>
+      <button class="btn" type="submit">Request fitting on WhatsApp</button>
+      <p class="error" role="alert"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p><b>OMAQ Apparel</b>, Scotland, United Kingdom</p>
+  <p><a id="wa-link" href="#">WhatsApp</a> <a href="https://www.instagram.com/omaq_apparel" rel="noopener">Instagram</a> <a href="https://vm.tiktok.com/ZN8Bhapgd/" rel="noopener">TikTok</a></p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
