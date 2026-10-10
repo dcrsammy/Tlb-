@@ -4,14 +4,15 @@ const CONFIG = {
   whatsappNumber: "",
 };
 
-// Placeholder gallery art. Replace each `src` with a real photo in /images when the client sends them.
-const GALLERY = [
-  { src: "images/tartan-mag.svg", label: "Occasion dress" }, { src: "images/ankara-org.svg", label: "Two-piece set" },
-  { src: "images/adire.svg", label: "Tailored trousers" }, { src: "images/kente.svg", label: "Family matching set" },
-  { src: "images/ankara-teal.svg", label: "Statement skirt" }, { src: "images/tartan-vio.svg", label: "Wedding guest outfit" },
+// Placeholder style catalogue. Replace each `src` with a real photo in /images when the client sends them.
+const CATALOG = [
+  { id: "OM-W-001", name: "Two-piece set", cat: "Women", src: "images/ankara-org.svg" },
+  { id: "OM-W-002", name: "Occasion dress", cat: "Women", src: "images/tartan-mag.svg" },
+  { id: "OM-W-003", name: "Statement skirt", cat: "Women", src: "images/ankara-teal.svg" },
+  { id: "OM-M-001", name: "Tailored trousers", cat: "Men", src: "images/adire.svg" },
+  { id: "OM-M-002", name: "Traditional set", cat: "Men", src: "images/kente.svg" },
+  { id: "OM-C-001", name: "Family matching set", cat: "Children", src: "images/tartan-vio.svg" },
 ];
-const grid = document.getElementById("gallery-grid");
-if (grid) grid.innerHTML = GALLERY.map((g, i) => `<figure class="${i % 3 === 0 ? "tall" : ""}"><img src="${g.src}" alt="${g.label}" loading="lazy"><figcaption>${g.label}</figcaption></figure>`).join("");
 
 const waUrl = text => `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
 document.getElementById("wa-link").href = CONFIG.whatsappNumber ? waUrl("Hello OMAQ Apparel") : "https://www.instagram.com/omaq_apparel";
@@ -41,3 +42,42 @@ function handle(formId, build) {
 }
 handle("form-order", d => `Hello OMAQ Apparel, I would like to order a piece.\nName: ${d.name}\nFor: ${d.who}\nItem: ${d.item}\nNeeded by: ${d.date || "flexible"}\nFabric: ${d.fabric}\nDelivery: ${d.delivery}\nDetails: ${d.notes || "none"}`);
 handle("form-fitting", d => `Hello OMAQ Apparel, I would like to book a fitting.\nName: ${d.name}\nTown: ${d.town}\nDate: ${d.date}\nTime: ${d.time}\nFor: ${d.item || "not sure yet"}`);
+
+const waf = document.getElementById("wa-float");
+if (waf && CONFIG.whatsappNumber) waf.href = waUrl("Hello OMAQ Apparel");
+
+const burger = document.querySelector(".burger"), menu = document.getElementById("menu");
+if (burger) burger.addEventListener("click", () => burger.setAttribute("aria-expanded", menu.classList.toggle("open")));
+
+const store = {
+  get() { try { return JSON.parse(localStorage.getItem("omaq-favs")) || []; } catch (e) { return []; } },
+  set(v) { try { localStorage.setItem("omaq-favs", JSON.stringify(v)); } catch (e) {} },
+};
+const countEl = document.getElementById("fav-count");
+const syncCount = () => { if (countEl) countEl.textContent = store.get().length; };
+const card = i => { const on = store.get().includes(i.id);
+  const href = CONFIG.whatsappNumber ? waUrl(`Hello OMAQ Apparel, I am interested in style ${i.id} (${i.name}).`) : `order.html?style=${i.id}`;
+  return `<article class="item"><img src="${i.src}" alt="${i.name}" loading="lazy"><div class="meta"><span>${i.id}</span><button class="fav" data-id="${i.id}" aria-label="Save ${i.name}" aria-pressed="${on}">${on ? "&#9829;" : "&#9825;"}</button></div><h3>${i.name}</h3><p>Price on request</p><a class="chat" href="${href}">Chat to the tailor</a></article>`; };
+
+const catalog = document.getElementById("catalog");
+if (catalog) {
+  let cat = "All"; const pills = document.getElementById("pills");
+  const draw = () => {
+    catalog.innerHTML = CATALOG.filter(i => cat === "All" || i.cat === cat).map(card).join("");
+    const list = CATALOG.filter(i => store.get().includes(i.id));
+    document.getElementById("favourites").hidden = !list.length;
+    document.getElementById("favlist").innerHTML = list.map(card).join("");
+    const msg = "Hello OMAQ Apparel, I would like to order these styles:\n" + list.map(i => `${i.id} ${i.name}`).join("\n");
+    document.getElementById("fav-order").href = CONFIG.whatsappNumber ? waUrl(msg) : "order.html";
+    syncCount();
+  };
+  pills.innerHTML = ["All", "Women", "Men", "Children"].map(c => `<button aria-pressed="${c === "All"}">${c}</button>`).join("");
+  pills.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; cat = b.textContent;
+    pills.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); });
+  document.addEventListener("click", e => { const b = e.target.closest(".fav"); if (!b) return;
+    const f = store.get(); store.set(f.includes(b.dataset.id) ? f.filter(x => x !== b.dataset.id) : [...f, b.dataset.id]); draw(); });
+  draw();
+}
+const styleId = new URLSearchParams(location.search).get("style"), itemInput = document.querySelector("#form-order [name=item]");
+if (styleId && itemInput) { const m = CATALOG.find(i => i.id === styleId); itemInput.value = m ? `${m.name} (${m.id})` : styleId; }
+syncCount();

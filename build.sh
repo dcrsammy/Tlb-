@@ -1,7 +1,7 @@
 #!/bin/sh
 # Generates the static pages. Run: sh build.sh
-NAV="index:Home services:Services how-it-works:How_it_works story:Our_story gallery:Gallery"
-page(){ f=$1; cur=$2; title=$3; cls=$4; h1=$5; sub=$6
+NAV="collection:Collection services:Services how-it-works:How_it_works measure:Measurements story:Our_story"
+page(){ f=$1; cur=$2; title=$3; cls=$4; h1=$5; sub=$6; art=""; case "$cls" in *home*) art="$7";; esac
 links=""; for n in $NAV; do k=${n%%:*}; t=$(echo "${n#*:}"|tr _ ' '); a=""; [ "$k" = "$cur" ] && a=' aria-current="page"'; links="$links<a href=\"$k.html\"$a>$t</a>"; done
 cat > "$f" <<EOT
 <!DOCTYPE html>
@@ -11,24 +11,26 @@ cat > "$f" <<EOT
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"></head><body>
-<header class="top"><a class="logo" href="index.html">OMAQ <span>Apparel</span></a><nav aria-label="Main">$links<a class="btn" href="order.html"$([ "$cur" = order ] && echo ' aria-current="page"')>Order or book</a></nav></header>
-<main><section class="phead $cls"><div class="in"><div><h1>$h1</h1><p>$sub</p></div>$7</div></section>
+<div class="bar">Fittings in Scotland. Delivery across the UK.</div>
+<header class="top"><a class="logo" href="index.html">OMAQ <span>Apparel</span></a><div class="tools"><a class="heart" href="collection.html#favourites" aria-label="Favourites">&#9825; <span id="fav-count">0</span></a><button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button></div><nav id="menu" aria-label="Main">$links<a class="btn" href="order.html"$([ "$cur" = order ] && echo ' aria-current="page"')>Order or book</a></nav></header>
+<main><section class="phead $cls"><div class="in"><div><h1>$h1</h1><p>$sub</p></div>$art</div></section>
 EOT
 cat >> "$f"
 cat >> "$f" <<'EOT'
 </main>
 <footer><p><b>OMAQ Apparel</b>, Scotland, United Kingdom</p><p><a id="wa-link" href="#">WhatsApp</a><a href="https://www.instagram.com/omaq_apparel" rel="noopener">Instagram</a><a href="https://vm.tiktok.com/ZN8Bhapgd/" rel="noopener">TikTok</a></p></footer>
+<a class="wa-float" id="wa-float" href="order.html" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.2 13.9c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.2 1.3 2.5 1.5.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.1z"/></svg></a>
 <script src="app.js"></script></body></html>
 EOT
 }
 
 A(){ echo "<img class=\"art\" src=\"images/$1\" alt=\"\">"; }
-page index.html index "Custom outfits" "c-mag home" "Timeless. Unique. Yours." 'Custom wears for every gender and age, made from your measurements in the fabric you choose. Based in Scotland, delivering across the UK.<span class="cta"><a class="btn yel" href="order.html">Order a piece</a><a class="btn line" href="order.html?tab=fitting">Book a fitting</a></span>' '<div class="collage"><img class="a" src="images/tartan-mag.svg" alt=""><img class="b" src="images/ankara-teal.svg" alt=""><img class="d" src="images/dress-form.svg" alt="Dress form wearing a printed outfit"></div>' <<'B'
+page index.html index "Custom outfits" "c-mag home" "Timeless. Unique. Yours." 'Custom wears for every gender and age, made from your measurements in the fabric you choose. Based in Scotland, delivering across the UK.<span class="cta"><a class="btn yel" href="collection.html">View the collection</a><a class="btn line" href="order.html">Order a piece</a></span>' '<div class="collage"><img class="a" src="images/tartan-mag.svg" alt=""><img class="b" src="images/ankara-teal.svg" alt=""><img class="d" src="images/dress-form.svg" alt="Dress form wearing a printed outfit"></div>' <<'B'
 <section class="wrap"><h2>Explore</h2><nav class="cards" aria-label="Explore">
-<a href="services.html"><img src="images/ankara-org.svg" alt=""><b>What we make</b><span>Women, men, children and fabric sourcing</span></a>
-<a href="how-it-works.html"><img src="images/kente.svg" alt=""><b>How it works</b><span>From idea to delivery in five steps</span></a>
-<a href="story.html"><img src="images/adire.svg" alt=""><b>Our story</b><span>Where OMAQ began</span></a>
-<a href="gallery.html"><img src="images/tartan-vio.svg" alt=""><b>Recent work</b><span>See what we have made</span></a></nav></section>
+<a href="collection.html"><img src="images/ankara-org.svg" alt=""><b>The collection</b><span>Browse styles, save favourites, chat to the tailor</span></a>
+<a href="services.html"><img src="images/kente.svg" alt=""><b>What we make</b><span>Women, men, children and fabric sourcing</span></a>
+<a href="measure.html"><img src="images/adire.svg" alt=""><b>How to measure</b><span>Six measurements, about ten minutes</span></a>
+<a href="story.html"><img src="images/tartan-vio.svg" alt=""><b>Our story</b><span>Where OMAQ began</span></a></nav></section>
 <section class="wrap"><h2>Your fabric, your way</h2><p class="lead2">Bring your own fabric, or we source it for you and you approve it before we cut.</p>
 <div class="strip"><img src="images/ankara-org.svg" alt=""><img src="images/tartan-mag.svg" alt=""><img src="images/adire.svg" alt=""><img src="images/kente.svg" alt=""><img src="images/ankara-teal.svg" alt=""><img src="images/tartan-vio.svg" alt=""></div></section>
 B
@@ -62,9 +64,22 @@ page story.html story "Our story" c-mag "Our story" "Where OMAQ Apparel began." 
 <p><a class="btn" href="gallery.html">See recent work</a></p></div></section>
 B
 
-page gallery.html gallery "Recent work" c-teal "Recent work" "A look at what we have made." "$(A tartan-mag.svg)" <<'B'
-<section class="wrap"><div class="gallery" id="gallery-grid"></div>
-<p class="note">Photos of finished pieces are coming soon. Follow us on Instagram and TikTok to see new work first.</p></section>
+page measure.html measure "How to measure" c-vio "How to measure" "Six measurements, one soft tape, about ten minutes. Order from anywhere in the UK." "" <<'B'
+<section class="wrap"><ol class="steps">
+<li><b>Bust or chest.</b> Wrap the tape around the fullest part, level under the arms. Snug, not tight.</li>
+<li><b>Waist.</b> Measure the narrowest part of your torso, about an inch above the navel.</li>
+<li><b>Hips.</b> Feet together, measure around the fullest part of your hips and seat.</li>
+<li><b>Shoulder.</b> Measure across your back from one shoulder point to the other.</li>
+<li><b>Arm length.</b> From the shoulder point to the wrist, with your arm slightly bent.</li>
+<li><b>Height.</b> Stand against a wall without shoes and measure to the top of your head.</li></ol>
+<p class="note">Wear fitted clothes, ask a friend to help, and measure twice. In Scotland we can take your measurements in person at a fitting.</p>
+<p><a class="btn" href="order.html">Send your order</a> <a class="btn line dark" href="order.html?tab=fitting">Book a fitting</a></p></section>
+B
+
+page collection.html collection "Collection" c-mag "The collection" "Styles we make. Every piece can be made to your own measurements." "" <<'B'
+<section class="wrap"><div class="pills" id="pills"></div><div class="catalog" id="catalog"></div>
+<p class="note">Photos of finished pieces are coming soon. Prices are agreed with you for each piece.</p></section>
+<section class="wrap" id="favourites" hidden><h2>Your favourites</h2><div class="catalog" id="favlist"></div><p><a class="btn" id="fav-order" href="order.html">Order these on WhatsApp</a></p></section>
 B
 
 page order.html order "Order or book" c-yel "Order or book" "Request a piece or book a fitting. We reply on WhatsApp." "$(A adire.svg)" <<'B'
