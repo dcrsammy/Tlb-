@@ -9,7 +9,7 @@ cat > "$f" <<EOT
 <title>$title | OMAQ Apparel</title>
 <meta name="description" content="Timeless, unique custom outfits for all genders and ages. Fabric sourcing, in-person fittings in Scotland, UK-wide delivery.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"></head><body>
 <div class="bar">Fittings in Scotland. Delivery across the UK.</div>
 <header class="top"><a class="logo" href="index.html">OMAQ <span>Apparel</span></a><div class="tools"><a class="heart" href="collection.html#favourites" aria-label="Favourites">&#9825; <span id="fav-count">0</span></a><button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button></div><nav id="menu" aria-label="Main">$links<a class="btn" href="order.html"$([ "$cur" = order ] && echo ' aria-current="page"')>Order or book</a></nav></header>
@@ -25,43 +25,48 @@ EOT
 }
 
 A(){ echo "<img class=\"art\" src=\"images/$1\" alt=\"\">"; }
-page index.html index "Custom outfits" "c-mag home" "Timeless. Unique. Yours." 'Custom wears for every gender and age, made from your measurements in the fabric you choose. Based in Scotland, delivering across the UK.<span class="cta"><a class="btn yel" href="collection.html">View the collection</a><a class="btn line" href="order.html">Order a piece</a></span>' '<div class="collage"><img class="a" src="images/tartan-mag.svg" alt=""><img class="b" src="images/ankara-teal.svg" alt=""><img class="d" src="images/dress-form.svg" alt="Dress form wearing a printed outfit"></div>' <<'B'
-<section class="wrap"><h2>Explore</h2><nav class="cards" aria-label="Explore">
-<a href="collection.html"><img src="images/ankara-org.svg" alt=""><b>The collection</b><span>Browse styles, save favourites, chat to the tailor</span></a>
-<a href="services.html"><img src="images/kente.svg" alt=""><b>What we make</b><span>Women, men, children and fabric sourcing</span></a>
-<a href="measure.html"><img src="images/adire.svg" alt=""><b>How to measure</b><span>Six measurements, about ten minutes</span></a>
-<a href="story.html"><img src="images/tartan-vio.svg" alt=""><b>Our story</b><span>Where OMAQ began</span></a></nav></section>
-<section class="wrap"><h2>Your fabric, your way</h2><p class="lead2">Bring your own fabric, or we source it for you and you approve it before we cut.</p>
-<div class="strip"><img src="images/ankara-org.svg" alt=""><img src="images/tartan-mag.svg" alt=""><img src="images/adire.svg" alt=""><img src="images/kente.svg" alt=""><img src="images/ankara-teal.svg" alt=""><img src="images/tartan-vio.svg" alt=""></div></section>
+page index.html index "Custom outfits" "c-mag home" 'Timeless.<span>Unique.</span><span>Yours.</span>' 'Custom wears for every gender and age, made from your measurements in the fabric you choose. Based in Scotland, delivering across the UK.<span class="cta"><a class="btn yel" href="collection.html">View the collection</a><a class="btn line" href="order.html">Order a piece</a></span>' '<div class="swatches"><figure class="s1"><img src="images/ankara-org.svg" alt=""><figcaption>OM-W-001</figcaption></figure><figure class="s2"><img src="images/tartan-vio.svg" alt=""><figcaption>OM-C-001</figcaption></figure><figure class="s3"><img src="images/kente.svg" alt=""><figcaption>OM-M-002</figcaption></figure></div>' <<'B'
+<div class="ruler" aria-hidden="true"></div>
+<section class="wrap"><h2>The collection</h2><div class="look">
+<a class="l1" href="collection.html"><img src="images/ankara-org.svg" alt=""><span>Two-piece sets</span></a>
+<a class="l2" href="collection.html"><img src="images/tartan-mag.svg" alt=""><span>Occasion dresses</span></a>
+<a class="l3" href="collection.html"><img src="images/kente.svg" alt=""><span>Menswear</span></a></div>
+<a class="btn" href="collection.html">View all styles</a></section>
+<section class="statement"><p>Every piece is different. So is every client.</p></section>
+<section class="wrap"><h2>How it works</h2><ol class="steps">
+<li><span><b>Tell us your idea.</b> Send a request or photos of what you like.</span></li>
+<li><span><b>Agree the details.</b> We chat on WhatsApp about fabric, style, price and timing.</span></li>
+<li><span><b>Measurements and fitting.</b> In person in Scotland. Guided measuring for the rest of the UK.</span></li>
+<li><span><b>We make it.</b> You see progress before it is finished.</span></li>
+<li><span><b>Delivery or pickup.</b> Tracked UK delivery, or collect in Scotland.</span></li></ol></section>
+<section class="cta-band"><div><h2>Start with an idea.</h2><p>Send a request, or book a fitting if you are in Scotland.</p><a class="btn" href="order.html">Order a piece</a> <a class="btn line dark" href="order.html?tab=fitting">Book a fitting</a></div></section>
 B
 
-page services.html services "What we make" c-org "What we make" "Custom wear for all genders and ages, cut to you." "$(A ankara-teal.svg)" <<'B'
-<section class="wrap"><dl class="services">
-<div><img src="images/tartan-mag.svg" alt=""><dt>Women</dt><dd>Dresses, blouses, skirts, trousers, two-piece sets and outfits for your outing.</dd></div>
-<div><img src="images/kente.svg" alt=""><dt>Men</dt><dd>Shirts, trousers, suits and traditional wear, cut to your measurements.</dd></div>
-<div><img src="images/ankara-org.svg" alt=""><dt>Children</dt><dd>Matching family outfits and special-day wear for all ages.</dd></div>
-<div><img src="images/adire.svg" alt=""><dt>Fabric sourcing</dt><dd>Tell us the look. We find the fabric and you approve it before we cut.</dd></div>
-</dl><p class="note">Every piece is different, so each one is priced after we talk about your design.</p>
-<p><a class="btn" href="order.html">Order a piece</a></p></section>
+page services.html services "What we make" c-org "What we make" "Custom wear for all genders and ages, cut to you." "" <<'B'
+<section class="rows">
+<article class="r1"><img src="images/tartan-mag.svg" alt=""><div><h2>Women</h2><p>Dresses, blouses, skirts, trousers, two-piece sets and outfits for your outing.</p></div></article>
+<article class="r2"><img src="images/kente.svg" alt=""><div><h2>Men</h2><p>Shirts, trousers, suits and traditional wear, cut to your measurements.</p></div></article>
+<article class="r3"><img src="images/ankara-org.svg" alt=""><div><h2>Children</h2><p>Matching family outfits and special-day wear for all ages.</p></div></article>
+<article class="r4"><img src="images/adire.svg" alt=""><div><h2>Fabric sourcing</h2><p>Tell us the look. We find the fabric and you approve it before we cut.</p></div></article></section>
+<section class="wrap"><p class="note">Every piece is different, so each one is priced after we talk about your design.</p><a class="btn" href="order.html">Order a piece</a></section>
 B
 
-page how-it-works.html how-it-works "How it works" c-vio "How it works" "Five steps from idea to your door." "$(A ankara-org.svg)" <<'B'
+page how-it-works.html how-it-works "How it works" c-vio "How it works" "Five steps from idea to your door." "" <<'B'
 <section class="wrap"><ol class="steps">
-<li><b>Tell us your idea.</b> Send a request or photos of what you like.</li>
-<li><b>Agree the details.</b> We chat on WhatsApp about fabric, style, price and timing.</li>
-<li><b>Measurements and fitting.</b> In person in Scotland. Guided measuring for the rest of the UK.</li>
-<li><b>We make it.</b> You see progress before it is finished.</li>
-<li><b>Delivery or pickup.</b> Tracked UK delivery, or collect in Scotland. Worldwide shipping is coming.</li>
-</ol><p class="note">Payment is arranged on WhatsApp for now. Card payment is coming soon.</p>
-<p><a class="btn" href="order.html">Start your order</a></p></section>
+<li><span><b>Tell us your idea.</b> Send a request or photos of what you like.</span></li>
+<li><span><b>Agree the details.</b> We chat on WhatsApp about fabric, style, price and timing.</span></li>
+<li><span><b>Measurements and fitting.</b> In person in Scotland. Guided measuring for the rest of the UK.</span></li>
+<li><span><b>We make it.</b> You see progress before it is finished.</span></li>
+<li><span><b>Delivery or pickup.</b> Tracked UK delivery, or collect in Scotland. Worldwide shipping is coming.</span></li></ol>
+<p class="note">Payment is arranged on WhatsApp for now. Card payment is coming soon.</p><a class="btn" href="order.html">Start your order</a></section>
 B
 
-page story.html story "Our story" c-mag "Our story" "Where OMAQ Apparel began." "$(A tartan-vio.svg)" <<'B'
+page story.html story "Our story" c-mag "Our story" "Where OMAQ Apparel began." "" <<'B'
 <section class="wrap split"><figure class="figure"><img src="images/dress-form.svg" alt="Dress form wearing a printed outfit"></figure>
 <div class="story"><p>It began with a father who knew how to put an outfit together, and a daughter who was watching. He bought her her first heels.</p>
 <p>Later, she saw her aunt's sewing machine and started cutting paper into blouses, skirts and trousers.</p>
 <p>That paper became cloth. Today OMAQ Apparel makes clothes that are unique to the person wearing them.</p>
-<p><a class="btn" href="gallery.html">See recent work</a></p></div></section>
+<a class="btn" href="collection.html">See the collection</a></div></section>
 B
 
 page measure.html measure "How to measure" c-vio "How to measure" "Six measurements, one soft tape, about ten minutes. Order from anywhere in the UK." "" <<'B'
