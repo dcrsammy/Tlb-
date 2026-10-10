@@ -4,18 +4,14 @@ const CONFIG = {
   whatsappNumber: "",
 };
 
-// Placeholder gallery. Replace `src` with real photos in /images when the client sends them.
+// Placeholder gallery art. Replace each `src` with a real photo in /images when the client sends them.
 const GALLERY = [
-  { label: "Two-piece set", bg: "linear-gradient(160deg,#e5097f,#ff7a00)" },
-  { label: "Occasion dress", bg: "linear-gradient(160deg,#4a14c8,#00b3a4)" },
-  { label: "Tailored trousers", bg: "linear-gradient(160deg,#00b3a4,#ffd60a)" },
-  { label: "Matching family set", bg: "linear-gradient(160deg,#ff7a00,#e5097f)" },
+  { src: "images/tartan-mag.svg", label: "Occasion dress" }, { src: "images/ankara-org.svg", label: "Two-piece set" },
+  { src: "images/adire.svg", label: "Tailored trousers" }, { src: "images/kente.svg", label: "Family matching set" },
+  { src: "images/ankara-teal.svg", label: "Statement skirt" }, { src: "images/tartan-vio.svg", label: "Wedding guest outfit" },
 ];
-
 const grid = document.getElementById("gallery-grid");
-if (grid) grid.innerHTML = GALLERY.map(g =>
-  g.src ? `<img src="${g.src}" alt="${g.label}" loading="lazy">`
-        : `<div class="swatch" style="background:${g.bg}"><span>${g.label}</span></div>`).join("");
+if (grid) grid.innerHTML = GALLERY.map((g, i) => `<figure class="${i % 3 === 0 ? "tall" : ""}"><img src="${g.src}" alt="${g.label}" loading="lazy"><figcaption>${g.label}</figcaption></figure>`).join("");
 
 const waUrl = text => `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
 document.getElementById("wa-link").href = CONFIG.whatsappNumber ? waUrl("Hello OMAQ Apparel") : "https://www.instagram.com/omaq_apparel";
