@@ -27,11 +27,12 @@ EOT
 A(){ echo "<img class=\"art\" src=\"images/$1\" alt=\"\">"; }
 page index.html index "Custom outfits" "home" "" "" "$(cat partials/home-story.html)" <<'B'
 <section class="wrap"><h2>The collection</h2><div class="look">
-<a class="l1" href="collection.html"><img src="images/ankara-org.svg" alt=""><span>Two-piece sets</span></a>
-<a class="l2" href="collection.html"><img src="images/tartan-mag.svg" alt=""><span>Occasion dresses</span></a>
+<a class="l1" href="collection.html"><img src="images/purple-peplum.jpg" alt="Purple printed peplum top and skirt set"><span>Two-piece sets</span></a>
+<a class="l2" href="collection.html"><img src="images/patchwork-trousers.jpg" alt="Patchwork print wide-leg trousers with a white shirt"><span>Statement trousers</span></a>
 <a class="l3" href="collection.html"><img src="images/kente.svg" alt=""><span>Menswear</span></a></div>
 <a class="btn" href="collection.html">View all styles</a></section>
 <section class="statement"><p>Every piece is different. So is every client.</p></section>
+<section class="review"><blockquote><p>The dress is absolutely beautiful! It fits perfectly, looks exactly like the pictures, and the material feels comfortable and high-quality. I received so many compliments when I wore it. I am very happy with my purchase and would definitely recommend it!</p><footer>OMAQ Apparel client, by WhatsApp</footer></blockquote></section>
 <section class="wrap"><h2>How it works</h2><ol class="steps">
 <li><span><b>Tell us your idea.</b> Send a request or photos of what you like.</span></li>
 <li><span><b>Agree the details.</b> We chat on WhatsApp about fabric, style, price and timing.</span></li>
@@ -43,7 +44,7 @@ B
 
 page services.html services "What we make" c-org "What we make" "Custom wear for all genders and ages, cut to you." "" <<'B'
 <section class="rows">
-<article class="r1"><img src="images/tartan-mag.svg" alt=""><div><h2>Women</h2><p>Dresses, blouses, skirts, trousers, two-piece sets and outfits for your outing.</p></div></article>
+<article class="r1"><img src="images/patchwork-trousers.jpg" alt="Patchwork print wide-leg trousers"><div><h2>Women</h2><p>Dresses, blouses, skirts, trousers, two-piece sets and outfits for your outing.</p></div></article>
 <article class="r2"><img src="images/kente.svg" alt=""><div><h2>Men</h2><p>Shirts, trousers, suits and traditional wear, cut to your measurements.</p></div></article>
 <article class="r3"><img src="images/ankara-org.svg" alt=""><div><h2>Children</h2><p>Matching family outfits and special-day wear for all ages.</p></div></article>
 <article class="r4"><img src="images/adire.svg" alt=""><div><h2>Fabric sourcing</h2><p>Tell us the look. We find the fabric and you approve it before we cut.</p></div></article></section>

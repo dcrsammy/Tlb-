@@ -79,3 +79,8 @@ footer p{margin:.4rem 0}footer a{margin-right:1.2rem;color:var(--champ)}
 .look{display:block}.look a{margin:0 0 2rem!important}
 .copy{top:6%;width:90vw;height:30%}.ch h1,.ch h2{font-size:clamp(2.1rem,10vw,3.2rem)}.ch p{font-size:.9rem}
 .art{width:100vw;top:30%;height:70%}.story-cta{flex-direction:column;align-items:center;gap:.5rem;bottom:4%}}
+.reveal{position:absolute;left:50%;top:4%;height:78%;aspect-ratio:3/4;object-fit:cover;transform:translateX(-50%);opacity:0;border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.review{background:var(--ivory);padding:6rem 5vw}.review blockquote{max-width:52rem;margin:0 auto}
+.review p{font:500 clamp(1.7rem,3.6vw,2.7rem)/1.25 var(--disp);margin:0}
+.review footer{background:none;padding:1.5rem 0 0;color:var(--mute);font-size:.9rem;overflow:visible}.review footer::before{display:none}
+@media (max-width:46rem){.reveal{top:2%;height:64%}}

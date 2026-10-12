@@ -6,7 +6,8 @@ const CONFIG = {
 
 // Placeholder style catalogue. Replace each `src` with a real photo in /images when the client sends them.
 const CATALOG = [
-  { id: "OM-W-001", name: "Two-piece set", cat: "Women", src: "images/ankara-org.svg" },
+  { id: "OM-W-001", name: "Peplum two-piece set", cat: "Women", src: "images/purple-peplum.jpg" },
+  { id: "OM-W-004", name: "Patchwork wide-leg trousers", cat: "Women", src: "images/patchwork-trousers.jpg" },
   { id: "OM-W-002", name: "Occasion dress", cat: "Women", src: "images/tartan-mag.svg" },
   { id: "OM-W-003", name: "Statement skirt", cat: "Women", src: "images/ankara-teal.svg" },
   { id: "OM-M-001", name: "Tailored trousers", cat: "Men", src: "images/adire.svg" },
@@ -86,7 +87,7 @@ syncCount();
 (() => {
   const track = document.getElementById("track"); if (!track) return;
   const $ = id => document.getElementById(id), stage = $("stage"), chs = [...document.querySelectorAll(".ch")];
-  const line = $("line"), fill = $("fill"), dress = $("dress"), book = $("book"), spots = $("spots"), model = $("model"), parts = $("parts"), cta = $("cta"), prog = $("prog");
+  const line = $("line"), fill = $("fill"), dress = $("dress"), book = $("book"), spots = $("spots"), model = $("model"), parts = $("parts"), cta = $("cta"), rev = $("reveal"), prog = $("prog");
   const top = document.querySelector(".top"), L = line.getTotalLength(), still = matchMedia("(prefers-reduced-motion:reduce)").matches;
   line.style.strokeDasharray = L;
   const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), seg = (p, a, b) => cl((p - a) / (b - a)), mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
@@ -108,7 +109,8 @@ syncCount();
     const fl = seg(p, .55, .62), rv = seg(p, .78, .92), s = 1 - rv * .22;
     const y = 120 + (still ? 0 : Math.sin(t / 700) * 10 * fl * (1 - rv)) + rv * 20, rot = still ? 0 : Math.sin(t / 1100) * 3 * fl * (1 - rv);
     dress.setAttribute("transform", `translate(${200 - 100 * s} ${y}) scale(${s}) rotate(${rot} 100 200)`);
-    spots.setAttribute("opacity", seg(p, .72, .88)); model.setAttribute("opacity", rv);
+    spots.setAttribute("opacity", seg(p, .72, .88)); model.setAttribute("opacity", rv * (1 - seg(p, .84, .92)));
+    dress.style.opacity = 1 - seg(p, .84, .92); rev.style.opacity = seg(p, .84, .94);
     cta.style.opacity = seg(p, .93, .99); cta.style.pointerEvents = p > .95 ? "auto" : "none";
     prog.style.width = p * 90 + "vw";
   }
