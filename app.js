@@ -81,3 +81,37 @@ if (catalog) {
 const styleId = new URLSearchParams(location.search).get("style"), itemInput = document.querySelector("#form-order [name=item]");
 if (styleId && itemInput) { const m = CATALOG.find(i => i.id === styleId); itemInput.value = m ? `${m.name} (${m.id})` : styleId; }
 syncCount();
+
+// Home page scroll story: sketch -> printed fabric -> floating dress -> runway reveal
+(() => {
+  const track = document.getElementById("track"); if (!track) return;
+  const $ = id => document.getElementById(id), stage = $("stage"), chs = [...document.querySelectorAll(".ch")];
+  const line = $("line"), fill = $("fill"), dress = $("dress"), book = $("book"), spots = $("spots"), model = $("model"), parts = $("parts"), cta = $("cta"), prog = $("prog");
+  const top = document.querySelector(".top"), L = line.getTotalLength(), still = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  line.style.strokeDasharray = L;
+  const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), seg = (p, a, b) => cl((p - a) / (b - a)), mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  for (let i = 0; i < 26; i++) { const c = document.createElementNS("http://www.w3.org/2000/svg", "circle"); c.setAttribute("r", 1.5 + (i % 3)); c.setAttribute("fill", ["#e5097f", "#ff7a00", "#00b3a4", "#ffd60a"][i % 4]); c._a = i / 26 * 6.283; c._d = 40 + (i * 37 % 90); parts.appendChild(c); }
+  const bounds = [0, .17, .38, .58, .78, 1];
+  let cur = 0;
+  function draw(p, t) {
+    const wide = innerWidth > 740;
+    chs.forEach((el, i) => { const a = bounds[i], b = bounds[i + 1], e = Math.min(seg(p, a, a + .04) + (i ? 0 : 1), 1) * (1 - seg(p, b - .04, b) * (i < 4 ? 1 : 0));
+      el.style.opacity = e; el.style.transform = `translateY(${(wide ? -50 : 0)}%) translateY(${(1 - e) * 24}px)`; el.style.pointerEvents = e > .5 ? "auto" : "none"; });
+    const d = seg(p, .5, .65), bg = mix([241, 237, 230], [11, 10, 12], d), fg = mix([29, 26, 23], [240, 232, 222], d);
+    stage.style.setProperty("--bg", `rgb(${bg})`); stage.style.setProperty("--fg", `rgb(${fg})`);
+    top.style.setProperty("--hbg", `rgb(${bg})`); top.style.setProperty("--hfg", `rgb(${fg})`);
+    book.style.opacity = 1 - seg(p, .4, .55);
+    line.style.strokeDashoffset = L * (1 - seg(p, .1, .34)); line.style.stroke = d > .5 ? "#e8d5c0" : "#6b5f55";
+    fill.style.opacity = seg(p, .36, .5);
+    const pb = seg(p, .38, .6), pf = Math.sin(pb * Math.PI);
+    [...parts.children].forEach(c => { const r = c._d * pb * 2.2; c.setAttribute("cx", 200 + Math.cos(c._a) * r); c.setAttribute("cy", 300 + Math.sin(c._a) * r * 1.6); c.setAttribute("opacity", pf * .9); });
+    const fl = seg(p, .55, .62), rv = seg(p, .78, .92), s = 1 - rv * .22;
+    const y = 120 + (still ? 0 : Math.sin(t / 700) * 10 * fl * (1 - rv)) + rv * 20, rot = still ? 0 : Math.sin(t / 1100) * 3 * fl * (1 - rv);
+    dress.setAttribute("transform", `translate(${200 - 100 * s} ${y}) scale(${s}) rotate(${rot} 100 200)`);
+    spots.setAttribute("opacity", seg(p, .72, .88)); model.setAttribute("opacity", rv);
+    cta.style.opacity = seg(p, .93, .99); cta.style.pointerEvents = p > .95 ? "auto" : "none";
+    prog.style.width = p * 90 + "vw";
+  }
+  function tick(t) { const max = track.offsetHeight - stage.offsetHeight, tgt = cl(-track.getBoundingClientRect().top / max); cur = still ? tgt : cur + (tgt - cur) * .1; draw(cur, t); requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+})();

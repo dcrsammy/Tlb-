@@ -1,7 +1,7 @@
 #!/bin/sh
 # Generates the static pages. Run: sh build.sh
 NAV="collection:Collection services:Services how-it-works:How_it_works measure:Measurements story:Our_story"
-page(){ f=$1; cur=$2; title=$3; cls=$4; h1=$5; sub=$6; art=""; case "$cls" in *home*) art="$7";; esac
+page(){ f=$1; cur=$2; title=$3; cls=$4; h1=$5; sub=$6; art=""; case "$cls" in *home*) HERO="$7";; *) case "$cls" in *c-*) art="$7";; esac; HERO="<section class=\"phead $cls\"><div class=\"in\"><div><h1>$h1</h1><p>$sub</p></div>$art</div></section>";; esac
 links=""; for n in $NAV; do k=${n%%:*}; t=$(echo "${n#*:}"|tr _ ' '); a=""; [ "$k" = "$cur" ] && a=' aria-current="page"'; links="$links<a href=\"$k.html\"$a>$t</a>"; done
 cat > "$f" <<EOT
 <!DOCTYPE html>
@@ -9,11 +9,11 @@ cat > "$f" <<EOT
 <title>$title | OMAQ Apparel</title>
 <meta name="description" content="Timeless, unique custom outfits for all genders and ages. Fabric sourcing, in-person fittings in Scotland, UK-wide delivery.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"></head><body>
 <div class="bar">Fittings in Scotland. Delivery across the UK.</div>
 <header class="top"><a class="logo" href="index.html">OMAQ <span>Apparel</span></a><div class="tools"><a class="heart" href="collection.html#favourites" aria-label="Favourites">&#9825; <span id="fav-count">0</span></a><button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button></div><nav id="menu" aria-label="Main">$links<a class="btn" href="order.html"$([ "$cur" = order ] && echo ' aria-current="page"')>Order or book</a></nav></header>
-<main><section class="phead $cls"><div class="in"><div><h1>$h1</h1><p>$sub</p></div>$art</div></section>
+<main>$HERO
 EOT
 cat >> "$f"
 cat >> "$f" <<'EOT'
@@ -25,8 +25,7 @@ EOT
 }
 
 A(){ echo "<img class=\"art\" src=\"images/$1\" alt=\"\">"; }
-page index.html index "Custom outfits" "c-mag home" 'Timeless.<span>Unique.</span><span>Yours.</span>' 'Custom wears for every gender and age, made from your measurements in the fabric you choose. Based in Scotland, delivering across the UK.<span class="cta"><a class="btn yel" href="collection.html">View the collection</a><a class="btn line" href="order.html">Order a piece</a></span>' '<div class="swatches"><figure class="s1"><img src="images/ankara-org.svg" alt=""><figcaption>OM-W-001</figcaption></figure><figure class="s2"><img src="images/tartan-vio.svg" alt=""><figcaption>OM-C-001</figcaption></figure><figure class="s3"><img src="images/kente.svg" alt=""><figcaption>OM-M-002</figcaption></figure></div>' <<'B'
-<div class="ruler" aria-hidden="true"></div>
+page index.html index "Custom outfits" "home" "" "" "$(cat partials/home-story.html)" <<'B'
 <section class="wrap"><h2>The collection</h2><div class="look">
 <a class="l1" href="collection.html"><img src="images/ankara-org.svg" alt=""><span>Two-piece sets</span></a>
 <a class="l2" href="collection.html"><img src="images/tartan-mag.svg" alt=""><span>Occasion dresses</span></a>
